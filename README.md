@@ -142,9 +142,11 @@ Puedes modificar el `docker-compose.yml` para añadir variables de entorno:
 
 ```yaml
 environment:
-  - API_URL=http://backend:8000
+  - BACKEND_API_URL=http://backend:8000
   - DEBUG=true
 ```
+
+`BACKEND_API_URL` es la URL que utiliza Flask para consultar el backend. En Docker Compose ya apunta al servicio `backend`; para ejecución local puede configurarse, por ejemplo, como `http://localhost:8000`.
 
 ### Puertos Personalizados
 
@@ -161,8 +163,7 @@ ports:
 1. **Abrir el navegador** en `http://localhost:3000`
 2. **Ingresar número de factura** (ej: FAC-2025-001, INV-2024-123, etc.)
 3. **Hacer clic en "Generar Factura"**
-4. **Ver la vista previa** de la factura
-5. **Descargar PDF** haciendo clic en "Descargar PDF"
+4. El navegador abre la **vista previa del PDF**; desde su visor puedes descargarlo o imprimirlo.
 
 ## Comandos Docker Útiles
 
@@ -212,11 +213,16 @@ http http://localhost:8000/facturas/v1/TEST-001
 
 1. Navegar a `http://localhost:3000`
 2. Probar diferentes números de factura
-3. Verificar generación correcta de PDFs
+3. Verificar la vista previa del PDF y la descarga desde el visor del navegador
+
+Las pruebas enfocadas de la ruta Flask se pueden ejecutar desde `frontend/app` con:
+
+```bash
+python3 -m unittest
+```
 
 ## API Documentation
 
 La documentación interactiva de Swagger está disponible en:
 - `http://localhost:8000/docs` (Swagger UI)
 - `http://localhost:8000/redoc` (ReDoc)
-
